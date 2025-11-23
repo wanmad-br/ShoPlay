@@ -22,12 +22,21 @@ h1 {
     margin: 0;
 }
 
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .product {
     background: #ffffff;
     border: 1px solid #dddddd;
-    margin: 20px 0;
     padding: 15px;
     border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .product h2 {
@@ -41,4 +50,36 @@ h1 {
 .product .price {
     font-weight: bold;
     color: #e67e22;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    background: #ffffff;
+    border-top: 1px solid #dddddd;
+}
+
+.pagination-btn {
+    padding: 8px 12px;
+    background-color: #35424a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-btn:hover {
+    background-color: #e67e22;
+}
+
+.page-info {
+    font-weight: bold;
+    color: #35424a;
+    min-width: 150px;
+    text-align: center;
 }

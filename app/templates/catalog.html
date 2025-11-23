@@ -16,10 +16,25 @@
                 <div class="product">
                     <h2>{{ product.name }}</h2>
                     <p>{{ product.description }}</p>
-                    <p>Price: ${{ product.price }}</p>
+                    <p class="price">Price: ${{ "%.2f"|format(product.price) }}</p>
                 </div>
             {% endfor %}
         </section>
+        
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            {% if current_page > 1 %}
+                <a href="{{ url_for('main.catalog', page=1) }}" class="pagination-btn">First</a>
+                <a href="{{ url_for('main.catalog', page=current_page-1) }}" class="pagination-btn">Previous</a>
+            {% endif %}
+            
+            <span class="page-info">Page {{ current_page }} of {{ total_pages }}</span>
+            
+            {% if current_page < total_pages %}
+                <a href="{{ url_for('main.catalog', page=current_page+1) }}" class="pagination-btn">Next</a>
+                <a href="{{ url_for('main.catalog', page=total_pages) }}" class="pagination-btn">Last</a>
+            {% endif %}
+        </div>
     </main>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
