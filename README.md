@@ -65,3 +65,5 @@ Once the server is running, navigate to the homepage to view the product catalog
 ## Contributing
 
 Feel free to submit issues or pull requests if you would like to contribute to the project.
+
+### finish
