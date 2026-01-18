@@ -1,3 +1,5 @@
+### REVIEW TECH STACK - MIGRATE TO JAVA OR GO
+
 # Product Catalog Application
 
 This is a simple web application that serves a product catalog using Flask. The application displays a list of products with their details, allowing users to view and interact with the catalog.
