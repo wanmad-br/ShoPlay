@@ -1,5 +1,5 @@
 ### REVIEW TECH STACK - MIGRATE TO JAVA OR GO
-next tasj
+next task
 
 # Product Catalog Application
 
