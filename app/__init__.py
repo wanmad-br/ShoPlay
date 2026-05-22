@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-
+# Review ALL!!
 # Get the absolute path to the app directory
 app_dir = os.path.dirname(os.path.abspath(__file__))
 # validade this
