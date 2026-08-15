@@ -1,31 +1,52 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, jsonify, render_template, request
 from .models import Product
 
 main = Blueprint('main', __name__)
 
+
 @main.route('/')
 def catalog():
-    page = request.args.get('page', 1, type=int)
-    products_per_page = 5
-    
-    all_products = Product.get_all_products()
-    total_products = len(all_products)
-    
-    # Calculate pagination
-    total_pages = (total_products + products_per_page - 1) // products_per_page
-    start_idx = (page - 1) * products_per_page
-    end_idx = start_idx + products_per_page
-    
-    # Validate page number
-    if page < 1 or page > total_pages:
-        page = 1
-        start_idx = 0
-        end_idx = products_per_page
-    
-    paginated_products = all_products[start_idx:end_idx]
-    
-    return render_template('catalog.html', 
-                         products=paginated_products,
-                         current_page=page,
-                         total_pages=total_pages,
-                         total_products=total_products)
+    products = Product.get_all_products()
+    return render_template('catalog.html', products=products)
+
+
+@main.route('/api/products')
+def api_products():
+    return jsonify([product.to_dict() for product in Product.get_all_products()])
+
+
+@main.route('/api/purchase', methods=['POST'])
+def purchase():
+    payload = request.get_json(silent=True) or {}
+    item_id = int(payload.get('item_id', 0) or 0)
+    quantity = int(payload.get('quantity', 1) or 1)
+
+    if quantity < 1:
+        return jsonify({'status': 'error', 'message': 'Quantity must be at least 1.'}), 400
+
+    products = Product.get_all_products()
+    item = next((product for product in products if product.id == item_id), None)
+
+    if item is None:
+        return jsonify({'status': 'error', 'message': 'Item not found.'}), 404
+
+    if quantity > item.stock:
+        return jsonify({'status': 'error', 'message': 'Not enough stock available.'}), 400
+
+    item.stock -= quantity
+    total = round(item.price * quantity, 2)
+
+    return jsonify({
+        'status': 'success',
+        'item': item.to_dict(),
+        'quantity': quantity,
+        'total': total,
+        'receipt': {
+            'item_id': item.id,
+            'item_name': item.name,
+            'quantity': quantity,
+            'unit_price': item.price,
+            'total': total,
+            'currency': 'gold',
+        },
+    })

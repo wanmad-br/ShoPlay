@@ -1,70 +1,56 @@
 ### REVIEW TECH STACK - MIGRATE TO JAVA OR GO
 next task
 
-# Product Catalog Application
+# Arcane Market
 
-This is a simple web application that serves a product catalog using Flask. The application displays a list of products with their details, allowing users to view and interact with the catalog.
+This is a lightweight Flask storefront for a fantasy universe. It simulates a virtual e-commerce experience where players can browse magical items such as swords, capes, relics, and armor, then complete a mock purchase transaction.
 
-## Project Structure
+## Features
 
-```
-product-catalog-app
-├── app
-│   ├── __init__.py
-│   ├── routes.py
-│   ├── models.py
-│   ├── templates
-│   │   └── catalog.html
-│   └── static
-│       ├── styles.css
-│       └── script.js
-├── requirements.txt
-├── run.py
-└── README.md
-```
+- Fantasy-themed catalog with item rarity and stock
+- Simulated purchase endpoint for transactional flow
+- Responsive storefront UI with order summary panel
+- Python/Flask app structure ready to extend for a full game shop
 
-## Setup Instructions
+## Run locally
 
-1. **Clone the repository:**
-   ```
-   git clone <repository-url>
-   cd product-catalog-app
-   ```
-
-2. **Create a virtual environment:**
-   ```
-   python -m venv venv
-   ```
-
-3. **Activate the virtual environment:**
-   - On Windows:
-     ```
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```
-     source venv/bin/activate
-     ```
-
-4. **Install the required dependencies:**
-   ```
-   pip install -r requirements.txt
-   ```
-
-## Running the Application
-
-To start the Flask development server, run the following command:
-
-```
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 python run.py
 ```
 
-The application will be accessible at `http://127.0.0.1:5000/`.
+Then open http://127.0.0.1:5000/
 
-## Usage
+## Example purchase simulation
 
-Once the server is running, navigate to the homepage to view the product catalog. The catalog displays a list of products, each with a name, description, and price.
+The app exposes a POST endpoint at `/api/purchase` that accepts JSON like:
 
-## Contributing
+```json
+{
+  "item_id": 1,
+  "quantity": 2
+}
+```
 
-Feel free to submit issues or pull requests if you would like to contribute to the project.
+The response contains a simulated receipt and totals in gold.
+
+## Project structure
+
+```text
+ShoPlay/
+├── app/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── routes.py
+│   ├── static/
+│   │   ├── script.js
+│   │   └── styles.css
+│   └── templates/
+│       └── catalog.html
+├── requirements.txt
+├── run.py
+├── pytest.ini
+└── README.md
+```

@@ -4,38 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Product Catalog</title>
+    <title>Arcane Market</title>
 </head>
 <body>
-    <header>
-        <h1>Product Catalog</h1>
+    <header class="topbar">
+        <div class="brand-block">
+            <p class="eyebrow">Fantasy E-Commerce</p>
+            <h1>Arcane Market</h1>
+        </div>
+        <div class="wallet">
+            <span>Gold</span>
+            <strong>2500</strong>
+        </div>
     </header>
-    <main>
-        <section id="product-list">
+
+    <main class="shop-shell">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">The guild's premium stock</p>
+                <h2>Weapons, armor, and relics for your next quest</h2>
+            </div>
+            <button class="primary-btn">Open Inventory</button>
+        </section>
+
+        <section id="product-list" class="product-grid">
             {% for product in products %}
-                <div class="product">
-                    <h2>{{ product.name }}</h2>
+                <article class="product-card rarity-{{ product.rarity|lower }}">
+                    <span class="rarity-tag">{{ product.rarity }}</span>
+                    <h3>{{ product.name }}</h3>
+                    <p class="category">{{ product.category }}</p>
                     <p>{{ product.description }}</p>
-                    <p class="price">Price: ${{ "%.2f"|format(product.price) }}</p>
-                </div>
+                    <div class="product-meta">
+                        <span>Stock: {{ product.stock }}</span>
+                        <strong>{{ "%.2f"|format(product.price) }} gold</strong>
+                    </div>
+                    <button class="buy-btn" data-item-id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-price="{{ product.price }}">
+                        Buy now
+                    </button>
+                </article>
             {% endfor %}
         </section>
-        
-        <!-- Pagination Controls -->
-        <div class="pagination">
-            {% if current_page > 1 %}
-                <a href="{{ url_for('main.catalog', page=1) }}" class="pagination-btn">First</a>
-                <a href="{{ url_for('main.catalog', page=current_page-1) }}" class="pagination-btn">Previous</a>
-            {% endif %}
-            
-            <span class="page-info">Page {{ current_page }} of {{ total_pages }}</span>
-            
-            {% if current_page < total_pages %}
-                <a href="{{ url_for('main.catalog', page=current_page+1) }}" class="pagination-btn">Next</a>
-                <a href="{{ url_for('main.catalog', page=total_pages) }}" class="pagination-btn">Last</a>
-            {% endif %}
-        </div>
+
+        <aside id="receipt" class="receipt-panel">
+            <h3>Order Summary</h3>
+            <p class="empty-state">No transaction yet. Choose an item to begin your purchase.</p>
+        </aside>
     </main>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
