@@ -17,11 +17,14 @@ function updateReceipt(data) {
 async function handlePurchase(event) {
   const button = event.currentTarget;
   const itemId = Number(button.dataset.itemId);
+  const productCard = button.closest('.product-card');
+  const quantityInput = productCard ? productCard.querySelector('.quantity-input') : null;
+  const quantity = quantityInput ? Math.max(1, Number(quantityInput.value || 1)) : 1;
 
   const response = await fetch('/api/purchase', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ item_id: itemId, quantity: 1 })
+    body: JSON.stringify({ item_id: itemId, quantity })
   });
 
   const data = await response.json();

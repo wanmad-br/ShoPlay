@@ -38,6 +38,10 @@
                         <span>Stock: {{ product.stock }}</span>
                         <strong>{{ "%.2f"|format(product.price) }} gold</strong>
                     </div>
+                    <div class="purchase-row">
+                        <label class="quantity-label" for="qty-{{ product.id }}">Qty</label>
+                        <input id="qty-{{ product.id }}" class="quantity-input" type="number" min="1" max="{{ product.stock }}" value="1" />
+                    </div>
                     <button class="buy-btn" data-item-id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-price="{{ product.price }}">
                         Buy now
                     </button>

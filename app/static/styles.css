@@ -135,6 +135,31 @@ body {
     width: 100%;
 }
 
+.purchase-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.quantity-label {
+    color: #d9d1eb;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.quantity-input {
+    width: 70px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f7efcf;
+    padding: 0.55rem 0.65rem;
+    text-align: center;
+}
+
 .receipt-panel {
     background: rgba(17, 10, 29, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.08);
