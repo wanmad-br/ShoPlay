@@ -36,6 +36,10 @@ The app exposes a POST endpoint at `/api/purchase` that accepts JSON like:
 
 The response contains a simulated receipt and totals in gold.
 
+
+## To do
+Implement new version.
+
 ## Project structure
 
 ```text
